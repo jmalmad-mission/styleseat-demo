@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Set Env"
-        run: echo "GH_HEAD_BRANCH=$( echo ${{ github.head_ref }} | cut -d / -f 3)" >> $GITHUB_ENV
+        run: echo "GH_HEAD_BRANCH is $(echo ${{ github.head_ref }} | cut -d / -f 3) && echo "GH_HEAD_BRANCH=$( echo ${{ github.head_ref }} | cut -d / -f 3)" >> $GITHUB_ENV
       - name: "Checkout"
         uses: actions/checkout@master
       - name: "Configure AWS credentials"
@@ -43,13 +43,6 @@ jobs:
         continue-on-error: true
         env:
           TF_INPUT: 0
-      - name: Post Plan
-        if: always() && github.ref != 'refs/heads/master' && (steps.plan.outcome == 'success' || steps.plan.outcome == 'failure')
-        uses: robburger/terraform-pr-commenter@v1
-        with:
-          commenter_type: plan
-          commenter_input: ${{ format('{0}{1}', steps.plan.outputs.stdout, steps.plan.outputs.stderr) }}
-          commenter_exitcode: ${{ steps.plan.outputs.exitcode }}
       - name: "Terraform Apply"
         id: apply
         run: echo '1' | TF_WORKSPACE=$GH_HEAD_BRANCH terraform -chdir=tf/envs/$GH_HEAD_BRANCH apply -no-color -input=false -auto-approve
