@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Set Env"
-        run: echo "GH_HEAD_BRANCH is $(echo ${{ github.head_ref }}" && echo "GH_HEAD_BRANCH=$( echo ${{ github.head_ref }} | cut -d / -f 1)" >> $GITHUB_ENV
+        run: echo "GH_HEAD_BRANCH is $(echo ${{ github.head_ref }})" && echo "GH_HEAD_BRANCH=$( echo ${{ github.head_ref }} | cut -d / -f 1)" >> $GITHUB_ENV
       - name: "Checkout"
         uses: actions/checkout@master
       - name: "Configure AWS credentials"
