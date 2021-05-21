@@ -24,7 +24,7 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
       - name: "Set Env"
-        run: echo "GH_HEAD_BRANCH=$( echo ${{ github.head_ref }} | cut -d / -f 3)" >> $GITHUB_ENV
+        run: echo "GH_HEAD_BRANCH=$( echo ${{ github.head_ref }}" >> $GITHUB_ENV
       # - name: "Configure Deploy Keys"
       #   uses: webfactory/ssh-agent@v0.4.1
       #   with:
