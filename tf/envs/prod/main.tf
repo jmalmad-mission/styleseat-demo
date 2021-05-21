@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "d" {
+resource "aws_s3_bucket" "test" {
   bucket = "jake-ga-test-${terraform.workspace}"
   acl    = "private"
 
